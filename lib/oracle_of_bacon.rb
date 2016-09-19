@@ -44,6 +44,7 @@ class OracleOfBacon
       # convert all of these into a generic OracleOfBacon::NetworkError,
       #  but keep the original error message
       # your code here
+      raise NetworkError, e.to_s
     end
     # your code here: create the OracleOfBacon::Response object
   end
@@ -78,6 +79,7 @@ class OracleOfBacon
     def parse_error_response
      #Your code here.  Assign @type and @data
      # based on type attribute and body of the error element
+     if @doc.xpath
     end
 
     def parse_spellcheck_response
