@@ -59,6 +59,7 @@ class OracleOfBacon
 
     def initialize(xml)
       @doc = Nokogiri::XML(xml)
+      @raw = xml
       parse_response
     end
 
@@ -77,9 +78,12 @@ class OracleOfBacon
     end
 
     def parse_error_response
-     #Your code here.  Assign @type and @data
-     # based on type attribute and body of the error element
-     if @doc.xpath
+    #Your code here.  Assign @type and @data
+    # based on type attribute and body of the error element
+    #puts "#{@doc.inspect}"
+    @type = @doc.xpath('/error/@type').to_s().to_sym
+    @data = @doc.xpath('/error').text
+
     end
 
     def parse_spellcheck_response
