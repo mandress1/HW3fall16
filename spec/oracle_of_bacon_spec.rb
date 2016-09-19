@@ -6,7 +6,7 @@ require 'spec_helper'
 
 describe OracleOfBacon do
   before(:all) { FakeWeb.allow_net_connect = false }
-  describe 'instance', :skip => true do
+  describe 'instance' do
     before(:each) { @orb = OracleOfBacon.new('fake_api_key') }
     describe 'when new' do
       subject { @orb }
@@ -37,7 +37,7 @@ describe OracleOfBacon do
       end
     end
   end
-  describe 'parsing XML response', :skip => true do
+  describe 'parsing XML response' do
     describe 'for a normal match' do
       subject { OracleOfBacon::Response.new(File.read 'spec/graph_example.xml') }
       its(:type) { should == :graph }
