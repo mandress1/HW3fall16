@@ -78,12 +78,17 @@ class OracleOfBacon
     end
 
     def parse_error_response
-    #Your code here.  Assign @type and @data
-    # based on type attribute and body of the error element
-    #puts "#{@doc.inspect}"
-    @type = @doc.xpath('/error/@type').to_s().to_sym
-    @data = @doc.xpath('/error').text
+      #Your code here.  Assign @type and @data
+      # based on type attribute and body of the error element
+      #puts "#{@doc.inspect}"
+      errType = @doc.xpath('/error/@type').to_s()
 
+      if errType != "badinput" and errType != "unlinkable" and errType != "unauthorized"
+        parse_unknown_response
+      else
+        @type = errType.to_sym
+        @data = @doc.xpath('/error').text
+      end
     end
 
     def parse_spellcheck_response
