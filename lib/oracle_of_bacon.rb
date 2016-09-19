@@ -35,9 +35,11 @@ class OracleOfBacon
     make_uri_from_arguments
     begin
       xml = URI.parse(uri).read
+      resp = Response.new(xml)
     rescue OpenURI::HTTPError 
       xml = %q{<?xml version="1.0" standalone="no"?>
 <error type="unauthorized">unauthorized use of xml interface</error>}
+      resp = Response.new(xml)
     rescue Timeout::Error, Errno::EINVAL, Errno::ECONNRESET, EOFError,
       Net::HTTPBadResponse, Net::HTTPHeaderSyntaxError,
       Net::ProtocolError => e
@@ -52,6 +54,7 @@ class OracleOfBacon
   def make_uri_from_arguments
     # your code here: set the @uri attribute to properly-escaped URI
     # constructed from the @from, @to, @api_key arguments
+    @uri = "http://oracleofbacon.org/cgi-bin/xml?p=#{CGI.escape(@api_key)}&a=#{CGI.escape(@to)}&b=#{CGI.escape(@from)}"
   end
       
   class Response
