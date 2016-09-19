@@ -94,6 +94,8 @@ class OracleOfBacon
 
     def parse_graph_response
       #Your code here
+      @type = :graph
+      puts "#{@doc.xpath("/link").inspect}"
     end
 
     def parse_unknown_response
